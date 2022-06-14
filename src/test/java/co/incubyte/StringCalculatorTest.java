@@ -14,5 +14,6 @@ public class StringCalculatorTest {
         Assert.assertEquals(BigInteger.ONE, StringCalculator.Add("1"));
         Assert.assertEquals(new BigInteger("3"), StringCalculator.Add("1,2"));
         Assert.assertEquals(new BigInteger("5050"), StringCalculator.Add(IntStream.rangeClosed(1, 100).boxed().map(Object::toString).collect(Collectors.joining(","))));
+        Assert.assertEquals(new BigInteger("6"), StringCalculator.Add("1\n2,3"));
     }
 }
