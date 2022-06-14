@@ -21,9 +21,9 @@ class StringCalculator {
             String regex = (doubleSlash != -1 ? (delimiter + "|") : "") + ",|\n|\n\r";
             String finalNumbers = numbers;
             Supplier<Stream<String>> stream = () -> Arrays.stream(finalNumbers.split(regex));
-            BigInteger negative = stream.get().map(BigInteger::new).filter(it -> it.signum() == -1).findFirst().orElse(BigInteger.ZERO);
-            if (negative.compareTo(BigInteger.ZERO) > 0)
-                throw new Exception("negatives not allowed - " + negative);
+            List<BigInteger> negative = stream.get().map(BigInteger::new).filter(it -> it.signum() == -1).collect(Collectors.toList());
+            if (!negative.isEmpty())
+                throw new Exception("negatives not allowed - " + negative.stream().map(BigInteger::toString).collect(Collectors.joining(",")));
             List<BigInteger> integers = stream.get().map(BigInteger::new).collect(Collectors.toList());
             BigInteger sum = BigInteger.ZERO;
             for (BigInteger integer : integers) {

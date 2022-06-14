@@ -21,5 +21,6 @@ public class StringCalculatorTest {
     @Test(expected = Exception.class)
     public void negativeCase() throws Exception {
         StringCalculator.Add("-1,1");
+        StringCalculator.Add("-1,-2");
     }
 }
